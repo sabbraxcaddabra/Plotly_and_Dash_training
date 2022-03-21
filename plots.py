@@ -5,6 +5,11 @@ import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 import plotly
 
+import locale
+# locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
+
+import datetime
+
 from dash import dcc
 from dash import html
 import dash
@@ -29,12 +34,20 @@ u_group_peoples = {
 }
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
+                meta_tags=[
+                    {'name': 'viewport', 'content': 'width=device-width, initial-scale=0.5'}
+                ]
+                )
 
 app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.H1("Статистика приема абитуриентов БГТУ им. Д.Ф. Устинова \"Военмех\"", style={'textAlign': 'center'})
+        ]),
+        dbc.Col([
+            html.Div(children=f"Дата и время: {datetime.datetime.now().strftime('%d-%m-%y  %H:%M:%S')}", id='datetime-header', style={'fontSize': '25px'}),
+            dcc.Interval(id='minut-interval')
         ])
     ]),
 
@@ -80,6 +93,14 @@ app.layout = dbc.Container([
         ])
     ])
 ])
+
+@app.callback(
+    Output('datetime-header', 'children'),
+    [Input('minut-interval', 'n_intervals')]
+)
+def update_datetime(n):
+    date = datetime.datetime.now()
+    return html.Div(children=f"Дата и время: {date.strftime('%d-%m-%y  %H:%M:%S')}")
 
 @app.callback(
     Output("exam_dist", "figure"),
