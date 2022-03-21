@@ -156,5 +156,4 @@ def update_plot(value):
         return fig
 
 if __name__ == "__main__":
-    host = input('Введите ip хоста: ')
-    app.run_server(host=host, debug=True)
+    app.run_server(debug=True)
