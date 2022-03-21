@@ -115,7 +115,7 @@ def update_exam_dist(value):
 )
 def update_ege_hist(value=[30, 100]):
     ege_tmp = enrolled_ege.loc[(enrolled_ege['Ср Балл ЕГЭ'] >= value[0]) & (enrolled_ege['Ср Балл ЕГЭ'] <= value[1])]
-    fig = px.histogram(ege_tmp, x='Ср Балл ЕГЭ')
+    fig = px.histogram(ege_tmp, x='Ср Балл ЕГЭ', marginal='box')
 
     #fig.update_traces(opacity=0.85)
     fig.update_layout(bargap=0.1, barmode='overlay',
