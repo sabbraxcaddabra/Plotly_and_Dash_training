@@ -33,27 +33,28 @@ u_group_peoples = {
     'Бакалавриат и Специалитет': sum_count_bac_and_spec
 }
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = [dbc.themes.GRID, 'https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
                 meta_tags=[
-                    {'name': 'viewport', 'content': 'width=device-width, initial-scale=0.5'}
+                    {'name': 'viewport', 'content': 'width=device-width, initial-scale=0.7'}
                 ]
                 )
 
 app.layout = dbc.Container([
     dbc.Row([
+        dbc.Col(html.Div("Статистика приема абитуриентов БГТУ им. Д.Ф. Устинова \"Военмех\"",
+                         style={'textAlign': 'center', 'fontSize': '18px'})),
         dbc.Col([
-            html.H1("Статистика приема абитуриентов БГТУ им. Д.Ф. Устинова \"Военмех\"", style={'textAlign': 'center'})
-        ]),
-        dbc.Col([
-            html.Div(children=f"Дата и время: {datetime.datetime.now().strftime('%d-%m-%y  %H:%M:%S')}", id='datetime-header', style={'fontSize': '25px'}),
+            html.Div(children=f"Дата и время: {datetime.datetime.now().strftime('%d-%m-%y  %H:%M:%S')}",
+                     id='datetime-header', style={'fontSize': '18px'}),
             dcc.Interval(id='minut-interval')
-        ])
-    ]),
+        ], align='center'),
+
+        ]),
 
     dbc.Row([
         dbc.Col([
-            html.H2("Число зачисленных по укрупненным группам"),
+            html.H3("Число зачисленных по укрупненным группам"),
             dcc.Dropdown(
                 id="form_dropdown",
                 options=[
@@ -68,7 +69,7 @@ app.layout = dbc.Container([
     ]),
     dbc.Row([
         dbc.Col([
-            html.H2("Распределение абитуриентов по среднему баллу ЕГЭ"),
+            html.H3("Распределение абитуриентов по среднему баллу ЕГЭ"),
             dcc.RangeSlider(
                 id='ege_slider',
                 min=30,
@@ -82,7 +83,7 @@ app.layout = dbc.Container([
     ]),
     dbc.Row([
         dbc.Col([
-            html.H2('Соотношение абитуриентов, сдающих ЕГЭ или экзамен вуза по Физике, Информатике и Обществознанию'),
+            html.H3('Соотношение абитуриентов, сдающих ЕГЭ или экзамен вуза по Физике, Информатике и Обществознанию'),
             dcc.Checklist(
                 id="exam_checklist",
                 options=[{'label':typ, 'value':typ} for typ in ['Русский', 'Математика', 'Информатика', 'Физика', 'Общество', 'Иностранный', 'Биология']],
@@ -177,4 +178,5 @@ def update_plot(value):
         return fig
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    # app.run_server(debug=True)
+    app.run_server('192.168.0.188', debug=True)
