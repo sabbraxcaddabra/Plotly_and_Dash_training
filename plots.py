@@ -46,7 +46,7 @@ app.layout = dbc.Container([
                          style={'textAlign': 'center', 'fontSize': '18px'})),
         dbc.Col([
             html.Div(children=f"Дата и время: {datetime.datetime.now().strftime('%d-%m-%y  %H:%M:%S')}",
-                     id='datetime-header', style={'fontSize': '18px'}),
+                     id='datetime-header', style={'textAlign': 'center', 'fontSize': '18px'}),
             dcc.Interval(id='minut-interval')
         ], align='center'),
 
