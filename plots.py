@@ -179,4 +179,5 @@ def update_plot(value):
 
 if __name__ == "__main__":
     # app.run_server(debug=True)
-    app.run_server('192.168.0.188', debug=True)
+    app.run_server('172.24.135.27', debug=True)
+    # app.run_server('192.168.0.188', debug=True)
