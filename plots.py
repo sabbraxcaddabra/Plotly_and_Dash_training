@@ -46,7 +46,7 @@ app.layout = dbc.Container([
                          style={'textAlign': 'center', 'fontSize': '18px'})),
         dbc.Col([
             html.Div(children=f"Дата и время: {datetime.datetime.now().strftime('%d-%m-%y  %H:%M:%S')}",
-                     id='datetime-header', style={'fontSize': '18px'}),
+                     id='datetime-header', style={'textAlign': 'center', 'fontSize': '18px'}),
             dcc.Interval(id='minut-interval')
         ], align='center'),
 
@@ -179,4 +179,5 @@ def update_plot(value):
 
 if __name__ == "__main__":
     # app.run_server(debug=True)
-    app.run_server('192.168.0.188', debug=True)
+    app.run_server('172.24.135.27', debug=True)
+    # app.run_server('192.168.0.188', debug=True)
